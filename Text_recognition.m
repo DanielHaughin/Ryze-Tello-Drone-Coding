@@ -3,30 +3,46 @@ clear
 close all
 format compact
 
-%Loads image
-I = imread('C.png');
+%set-up camera connection
+cam = webcam('Microsoft Camera Rear');
+preview(cam)
+
+% % Create a cascade detector object.
+% faceDetector = vision.CascadeObjectDetector();
+
+pause(5);
+
+%takepicture
+I = snapshot(cam);
 %Identifies text
 txt = ocr(I);
 %specifying parameters to reference against
-A = "CHECKPOINT A";
-B = "CHECKPOINT B";
-C = "CHECKPOINT C";
+A = "CHECKPOINTA";
+A2 = "CHECKPOINT A";
+B = "CHECKPOINTB";
+B2 = "CHECKPOINT B";
+C = "CHECKPOINTC";
+C2 = "CHECKPOINT C";
 %referencing image to pre-determined text
 x = contains(txt.Text,A);
+x2 = contains(txt.Text,A2);
 y = contains(txt.Text,B);
+y2 = contains(txt.Text,B2);
 z = contains(txt.Text,C);
+z2 = contains(txt.Text,C2);
 
-if x == 1
+%if statements to determine correct checkpoint
+if x == 1 |  x2 == 1
     
-    b = 1;
+    t = 1;
     
-elseif y == 1
+elseif y == 1 | y2==1
         
-    b = 2;
+    t = 2;
 
-elseif z == 1
+elseif z == 1 | z2==1
         
-    b = 3;
+    t = 3;
        
-end  
+end
     
