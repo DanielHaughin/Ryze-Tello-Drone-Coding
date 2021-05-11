@@ -3,13 +3,30 @@ clear
 close all
 format compact
 
-I = imread('A.png');
+%Loads image
+I = imread('C.png');
+%Identifies text
 txt = ocr(I);
-A = "CHECKPOINT A"
-x = contains(txt.Text,A) 
+%specifying parameters to reference against
+A = "CHECKPOINT A";
+B = "CHECKPOINT B";
+C = "CHECKPOINT C";
+%referencing image to pre-determined text
+x = contains(txt.Text,A);
+y = contains(txt.Text,B);
+z = contains(txt.Text,C);
 
 if x == 1
     
     b = 1;
     
-end
+elseif y == 1
+        
+    b = 2;
+
+elseif z == 1
+        
+    b = 3;
+       
+end  
+    
