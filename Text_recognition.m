@@ -7,9 +7,6 @@ format compact
 cam = webcam('Microsoft Camera Rear');
 preview(cam)
 
-% % Create a cascade detector object.
-% faceDetector = vision.CascadeObjectDetector();
-
 pause(5);
 
 %takepicture
@@ -32,6 +29,9 @@ z = contains(txt.Text,C);
 z2 = contains(txt.Text,C2);
 
 %if statements to determine correct checkpoint
+%continues to search for checkpoint
+while t = 0
+    
 if x == 1 |  x2 == 1
     
     t = 1;
@@ -45,4 +45,6 @@ elseif z == 1 | z2==1
     t = 3;
        
 end
-    
+
+end
+
