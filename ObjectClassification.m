@@ -7,13 +7,16 @@ format compact
 pretrained = load('tinyYOLOv2-coco.mat');
 detector = pretrained.yolov2Detector;
 % Read test image.
-img = imread('people.jpg');
-
+img = imread('pc.jpg');
 % Detect objects in the test image.
-[bboxes, scores, labels] = detect(detector, img)
+[bboxes, scores, labels] = detect(detector, img);
+%determines if person is present
+person = ismember("person",labels);
 
-if labels == "person"
-% Visualize detection results.
-img = insertObjectAnnotation(img, 'rectangle', bboxes, labels);
-figure, imshow(img)
+%Produces graphic is person present
+if person == 1
+    % Visualize detection results.
+    img = insertObjectAnnotation(img, 'rectangle', bboxes, labels);
+    figure, imshow(img);
 end
+
