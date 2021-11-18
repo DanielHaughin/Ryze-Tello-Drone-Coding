@@ -59,8 +59,7 @@ if contains(t,"A")
         end   
     end
     
-    %If function to compare located text
-    %if true
+    %If function to determine next operation
     if a == 1 || a2 == 1
     
         %display in command line
@@ -93,18 +92,24 @@ if contains(t,"B")
     %start timer
     tim = tic;
     %while loop to look for text for 10 seconds or until text found
-    while isempty(txt) || toc<10
+    while toc(tim) <= 10
     
         %takepicture
         I = snapshot(cam);
         %Identifies text using OCR
         txt = ocr(I);
-    
+        a = contains(txt.Text,"CHECKPOINT B");
+        a2 = contains(txt.Text,"CHECKPOINTB");
+
+        if b == 1 || b2 == 1
+
+            break
+
+        end   
     end
     
-    %if function to compare located text
-    %if true
-    if contains(txt.Text,"CHECKPOINT A") || contains(txt.Text,"CHECKPOINTA")
+    %if function to determine next operation
+    if b == 1 || b2 == 1
     
         %display in command line
         disp("Drone at Checkpoint A")
