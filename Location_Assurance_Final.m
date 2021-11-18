@@ -49,11 +49,14 @@ if contains(t,"A")
         I = snapshot(cam);
         %Identifies text using OCR
         txt = ocr(I);
+        %comapre located text against expected values
         a = contains(txt.Text,"CHECKPOINT A");
         a2 = contains(txt.Text,"CHECKPOINTA");
 
+        %determine if correct text has been located
         if a == 1 || a2 == 1
 
+            %break out of while loop
             break
 
         end   
@@ -66,12 +69,14 @@ if contains(t,"A")
         disp("Drone at Checkpoint A")
         %move drone home
         moveleft(drone,'Distance',2,'Speed',1);
+        %land drone
         land(drone);
     
     else
     
         %display in command line
         disp("Drone lost")
+        %land drone
         land(drone);
     
     end
@@ -98,11 +103,14 @@ if contains(t,"B")
         I = snapshot(cam);
         %Identifies text using OCR
         txt = ocr(I);
+        %comapre located text against expected values
         a = contains(txt.Text,"CHECKPOINT B");
         a2 = contains(txt.Text,"CHECKPOINTB");
 
+        %If function to determine next operation
         if b == 1 || b2 == 1
 
+            %break out of while loop
             break
 
         end   
@@ -115,12 +123,14 @@ if contains(t,"B")
         disp("Drone at Checkpoint A")
         %move drone home
         moveleft(drone,'Distance',2,'Speed',1);
+        %land drone
         land(drone);
     
     else
     
         %display in command line
         disp("Drone lost")
+        %land drone
         land(drone);
     
     end
