@@ -24,8 +24,8 @@ s = serialport("COM5",115200);
 
 while (isempty(t))
     
-%red serial line
-t = readline(s);
+    %red serial line
+    t = readline(s);
 
 end
 
@@ -34,25 +34,34 @@ end
 %responing to button "A" press
 if contains(t,"A")
 
+    %display in command line
+    disp("Moving to Checkpoint A");
     %takeoff and move to desired location
     takeoff(drone);
     moveright(drone,'Distance',2,'Speed',1);
     
     %start timer
-    tim = tic
+    tim = tic;
     %while loop to look for text for 10 seconds or until text found
-    while isempty(txt) || toc<10
+    while toc(tim) <= 10
     
         %takepicture
         I = snapshot(cam);
         %Identifies text using OCR
         txt = ocr(I);
-    
+        a = contains(txt.Text,"CHECKPOINT A");
+        a2 = contains(txt.Text,"CHECKPOINTA");
+
+        if a == 1 || a2 == 1
+
+            break
+
+        end   
     end
     
     %If function to compare located text
     %if true
-    if contains(txt.Text,"CHECKPOINT A") || contains(txt.Text,"CHECKPOINTA")
+    if a == 1 || a2 == 1
     
         %display in command line
         disp("Drone at Checkpoint A")
@@ -75,12 +84,14 @@ end
 %responding to button "B" press
 if contains(t,"B")
 
+    %display in command line
+    disp("Moving to Checkpoint B");
     %takeoff and move to desired location
     takeoff(drone);
     moveright(drone,'Distance',2,'Speed',1);
     
     %start timer
-    tim = tic
+    tim = tic;
     %while loop to look for text for 10 seconds or until text found
     while isempty(txt) || toc<10
     
